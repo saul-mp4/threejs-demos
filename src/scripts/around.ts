@@ -5,20 +5,13 @@ import {
   Mesh,
   AmbientLight,
 } from "three";
-import { createCamera, createRenderer, createScene } from "../components";
-import Loop from "../systems/loop";
+import { startup } from "../components";
 
 function main() {
   // init
-  const container = document.querySelector<HTMLDivElement>("#app");
-  const renderer = createRenderer();
-  const camera = createCamera();
+  const { camera, scene, loop, renderer } = startup("#app");
   camera.position.set(0, 45, 90);
   camera.lookAt(0, 0, 0);
-  const scene = createScene();
-  const loop = new Loop(renderer, camera, scene);
-
-  container?.appendChild(renderer.domElement);
 
   // utils
   const createTurnTick = (mesh: Mesh) => {
@@ -81,5 +74,3 @@ function main() {
 }
 
 main();
-
-//why I have to use label

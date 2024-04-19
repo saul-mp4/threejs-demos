@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css">
+    <title>Three.JS</title>
+</head>
+
+<body>
+    <div id="app">
+        <button id="button" class="add">
+            El Gato
+        </button>
+    </div>
+    <style>
+        #button {
+            position: absolute;
+            font-size: 48px;
+            top: 52px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            padding: 8px 24px;
+        }
+
+        .add:hover {
+            cursor: grab;
+            background-color: #00A86B;
+        }
+        .remove:hover {
+            cursor: crosshair;
+            background-color: red;
+        }
+    </style>
+    <script type="module" src="/src/scripts/gato.ts"></script>
+</body>
+
+</html>
