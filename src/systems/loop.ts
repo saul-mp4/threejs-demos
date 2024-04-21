@@ -5,6 +5,7 @@ import {
   type Scene,
   type WebGLRenderer,
 } from "three";
+import { InteractiveObject } from "../components";
 
 export interface UpdatableObject {
   object: Object3D;
@@ -42,14 +43,17 @@ export default class Loop {
       object.tick(delta);
     }
   }
-  addUpdatable(
-    object: UpdatableObject["object"],
-    tick: UpdatableObject["tick"]
-  ) {
-    this.updatables.push({ object, tick });
+  // addUpdatable(
+  //   object: UpdatableObject["object"],
+  //   tick: UpdatableObject["tick"]
+  // ) {
+  //   this.updatables.push({ object, tick });
+  // }
+  addUpdatable(upd: InteractiveObject) {
+    this.updatables.push(upd);
   }
-  removeUpdatable(object: Object3D) {
-    const ind = this.updatables.findIndex((v) => v.object.id === object.id);
+  removeUpdatable(upd: InteractiveObject) {
+    const ind = this.updatables.findIndex((v) => v.object.id === upd.object.id);
     if (ind !== -1) {
       this.updatables.splice(ind, 1);
     }

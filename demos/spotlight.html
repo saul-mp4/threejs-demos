@@ -5,13 +5,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style.css">
-    <title>Gato</title>
+    <title>Spotlight</title>
 </head>
 
 <body>
     <div id="app">
         <button id="button" class="add">
-            El Gato
+            Change
         </button>
     </div>
     <style>
@@ -25,16 +25,12 @@
             padding: 8px 24px;
         }
 
-        .add:hover {
-            cursor: grab;
-            background-color: #00A86B;
-        }
-        .remove:hover {
-            cursor: crosshair;
-            background-color: red;
+        #button:hover {
+            cursor: col-resize;
+            background-color: lightyellow;
         }
     </style>
-    <script type="module" src="/src/scripts/gato.ts"></script>
+    <script type="module" src="/src/scripts/spotlight.ts"></script>
 </body>
 
 </html>

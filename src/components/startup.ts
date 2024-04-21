@@ -9,7 +9,7 @@ import { createScene } from "./scene";
  * @returns renderer, camera, scene and loop
  */
 export function startup(containerId: string) {
-  const container = document.querySelector<HTMLDivElement>(containerId);
+  const container = document.getElementById(containerId);
   const renderer = createRenderer();
   const camera = createCamera();
   const scene = createScene();

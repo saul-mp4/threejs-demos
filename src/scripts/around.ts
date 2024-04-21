@@ -5,11 +5,11 @@ import {
   Mesh,
   AmbientLight,
 } from "three";
-import { startup } from "../components";
+import { InteractiveObject, startup } from "../components";
 
 function main() {
   // init
-  const { camera, scene, loop, renderer } = startup("#app");
+  const { camera, scene, loop, renderer } = startup("app");
   camera.position.set(0, 45, 90);
   camera.lookAt(0, 0, 0);
 
@@ -17,7 +17,7 @@ function main() {
   const createTurnTick = (mesh: Mesh) => {
     const radPerSecond = MathUtils.degToRad(30);
     return (delta: number) => {
-      mesh.rotation.y += radPerSecond * delta;
+      mesh.rotateY(radPerSecond * delta);
     };
   };
 
@@ -29,8 +29,10 @@ function main() {
     shininess: 200,
   });
   const sunMesh = new Mesh(sunGeomtry, sunMaterial);
+  const sunInteract = new InteractiveObject(sunMesh);
+  sunInteract.tickEvent = createTurnTick(sunMesh);
   scene.add(sunMesh);
-  loop.addUpdatable(sunMesh, createTurnTick(sunMesh));
+  loop.addUpdatable(sunInteract);
 
   //earth
   const earthGeometry = new DodecahedronGeometry(2, 2);
@@ -41,8 +43,10 @@ function main() {
   });
   const earthMesh = new Mesh(earthGeometry, earthMaterial);
   earthMesh.position.x = 18;
+  const earthInteract = new InteractiveObject(sunMesh);
+  earthInteract.tickEvent = createTurnTick(earthMesh);
   sunMesh.add(earthMesh);
-  loop.addUpdatable(earthMesh, createTurnTick(earthMesh));
+  loop.addUpdatable(earthInteract);
 
   //moon
   const moonGeometry = new DodecahedronGeometry(1, 1);
@@ -53,8 +57,10 @@ function main() {
   });
   const moonMesh = new Mesh(moonGeometry, moonMaterial);
   moonMesh.position.x = 5;
+  const moonInteract = new InteractiveObject(moonMesh);
+  moonInteract.tickEvent = createTurnTick(moonMesh);
   earthMesh.add(moonMesh);
-  loop.addUpdatable(moonMesh, createTurnTick(moonMesh));
+  loop.addUpdatable(moonInteract);
 
   //light
   const light = new AmbientLight(0x404040, 35);

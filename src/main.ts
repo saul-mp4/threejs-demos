@@ -1,5 +1,10 @@
 import { BoxGeometry, MathUtils, Mesh, MeshBasicMaterial } from "three";
-import { createCamera, createRenderer, createScene } from "./components";
+import {
+  InteractiveObject,
+  createCamera,
+  createRenderer,
+  createScene,
+} from "./components";
 import Loop from "./systems/loop";
 
 function main() {
@@ -17,15 +22,16 @@ function main() {
       color: "gray",
     });
     const cube = new Mesh(geo, mat);
-    const radPerSecond = MathUtils.degToRad(45);
+    const cubeInteract = new InteractiveObject(cube);
 
-    const tick = (delta: number) => {
+    const radPerSecond = MathUtils.degToRad(45);
+    cubeInteract.tickEvent = (delta: number) => {
       cube.rotation.z += radPerSecond * delta;
       cube.rotation.x += radPerSecond * delta;
     };
 
     scene.add(cube);
-    loop.addUpdatable(cube, tick);
+    loop.addUpdatable(cubeInteract);
   }
 
   loop.start();

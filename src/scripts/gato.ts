@@ -5,11 +5,11 @@ import {
   BoxGeometry,
   MeshPhongMaterial,
 } from "three";
-import { createTextureLoader, startup } from "../components";
+import { InteractiveObject, createTextureLoader, startup } from "../components";
 
 function main() {
   // init
-  const { camera, loop, scene } = startup("#app");
+  const { camera, loop, scene } = startup("app");
   camera.position.set(0, 25, 50);
   camera.lookAt(0, 0, 0);
 
@@ -27,10 +27,12 @@ function main() {
       })
   );
   const boxMesh = new Mesh(boxGeometry, boxMaterials);
+  const boxInteract = new InteractiveObject(boxMesh);
   const rotSpeed = MathUtils.degToRad(30);
-  const boxTick = (delta: number) => {
-    boxMesh.rotation.y += rotSpeed * delta;
-    boxMesh.rotation.x += rotSpeed * delta;
+  boxInteract.tickEvent = (delta: number) => {
+    const val = rotSpeed * delta;
+    boxMesh.rotateY(val);
+    boxMesh.rotateX(val);
   };
 
   // light
@@ -47,14 +49,16 @@ function main() {
       onScene = false;
       button.classList.remove("remove");
       button.classList.add("add");
+      button.innerHTML = "El Gato";
       scene.remove(boxMesh);
-      loop.removeUpdatable(boxMesh);
+      loop.removeUpdatable(boxInteract);
     } else {
       onScene = true;
       button.classList.remove("add");
       button.classList.add("remove");
+      button.innerHTML = "Kill";
       scene.add(boxMesh);
-      loop.addUpdatable(boxMesh, boxTick);
+      loop.addUpdatable(boxInteract);
     }
   });
 }
