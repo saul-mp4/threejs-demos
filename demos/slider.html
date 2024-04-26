@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css">
+    <title>Slider</title>
+</head>
+
+<body>
+    <div id="app">
+        <button id="left" class="add">
+            &lt;
+        </button>
+        <button id="right" class="add">
+            >
+        </button>
+    </div>
+    <style>
+        #right {
+            position: absolute;
+            font-size: 48px;
+            top: 52px;
+            left: 60%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            padding: 8px 24px;
+        }
+
+        #left {
+            position: absolute;
+            font-size: 48px;
+            top: 52px;
+            left: 40%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            padding: 8px 24px;
+        }
+
+        #right:hover,
+        #left:hover {
+            cursor: pointer;
+            background-color: lightyellow;
+        }
+    </style>
+    <script type="module" src="/src/scripts/slider.ts"></script>
+</body>
+
+</html>
