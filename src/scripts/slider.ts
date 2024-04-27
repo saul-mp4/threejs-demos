@@ -98,7 +98,7 @@ function main() {
       currSlide = 0;
     }
     const rotation = currSlide * 60;
-    planeUpd.rotateByAxis(rotation, 900, "x");
+    planeUpd.rotateByAxis(rotation, 900, "y");
   });
 
   right?.addEventListener("click", () => {
@@ -107,7 +107,7 @@ function main() {
       currSlide = 0;
     }
     const rotation = currSlide * 60;
-    planeUpd.rotateByAxis(rotation, 900, "x");
+    planeUpd.rotateByAxis(rotation, 900, "y");
   });
 
   loop.start();
